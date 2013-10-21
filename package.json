@@ -1,0 +1,24 @@
+{
+  "name": "textbooks-for-change",
+  "description": "Textbooks For Change HTML Theme",
+  "version": "1.0.0",
+  "homepage": "http://textbooksforchange.ca",
+  "author": {
+    "name": "WARPAINT Media",
+    "email": "hello@warpaintmedia.ca",
+    "url": "http://warpaintmedia.ca/"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "http://opensource.org/licenses/MIT"
+  }],
+  "dependencies": {
+    "grunt": "~0.4.1"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-sass": "*",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-autoprefixer": "~0.3.0"
+  }
+}
