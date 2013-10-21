@@ -1,0 +1,10 @@
+<header>
+  <h1>{{ site_title|e|upper }}</h1>
+  <nav>
+    <ul>
+      {% for item in config.nav_items %}
+      <li><a href="{{ item.url }}" {% if current_page.url == item.url %}class="active"{% endif %}>{{ item.title|e|upper }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+</header>
