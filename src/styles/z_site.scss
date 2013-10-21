@@ -1,0 +1,181 @@
+@import "imports/__normalize";
+
+// [class^="icon"] {
+//   position: relative;
+//   top: 0.1em;
+// }
+
+@font-face {
+  font-family: 'Cubano';
+  src: url('webfont/cubano-regular-webfont.eot');
+  src: url('webfont/cubano-regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('webfont/cubano-regular-webfont.woff') format('woff'),
+  url('webfont/cubano-regular-webfont.ttf') format('truetype'),
+  url('webfont/cubano-regular-webfont.svg#CubanoRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+
+@mixin fade($start) {
+  opacity: $start;
+  -webkit-backface-visibility: hidden;
+  transition: opacity 0.2s ease;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+$main-dark: #232323;
+$main-accent: #ff8000;
+
+html {
+  min-height: 100%;
+}
+
+body {
+  font: normal normal normal 16px/1 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  color: $main-dark;
+  overflow-x: hidden;
+  background: white;
+  text-rendering: optimizeLegibility;
+}
+
+*, *:after, *:before {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 100%;
+  width: 1140px;
+  margin: 0 auto;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/* IE6/7 support */
+.clearfix {
+  *zoom: 1;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+  &:hover {
+    color: $main-accent;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-family: 'Cubano';
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+header {
+  display: inline-block;
+  width: 100%;
+  padding: 1em 0;
+  h1 {
+    font-size: 1em;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.8em 0 0;
+    border-right: 2px solid white;
+    padding-right: 1em;
+  }
+  nav {
+    display: inline-block;
+    margin-top: 0.8em;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      display: inline-block;
+      vertical-align: top;
+      a {
+        display: inline-block;
+        margin: 0 2em 0 0;
+        transition: all 0.2s ease;
+        &.active {
+          color: $main-accent;
+        }
+        &:hover {
+          color: $main-accent;
+        }
+      }
+      &:first-child a {
+        margin-left: 1em;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1139px) {
+  header {
+    h1 {
+      border-right: none;
+    }
+    nav {
+      width: 100%;
+    }
+    ul {
+      text-align: center;
+      li:first-child a {
+        margin-left: 0.3em;
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 480px) {
+  header {
+    text-align: center;
+    img {
+      margin: 0;
+    }
+    h1 {
+      padding: 0;
+      display: block;
+    }
+    ul li {
+      width: 100%;
+      margin: 0 0 0.2em 0;
+      &:first-child {
+        margin: 0 0 0.2em 0;
+      }
+      a {
+        margin: 0;
+      }
+    }
+  }
+}
