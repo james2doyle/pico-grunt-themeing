@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]><html class="no-js lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 lt-ie9"><![endif]-->
+<!--[if IE 9]><html class="no-js ie9 lt-ie10"><![endif]-->
+<html class="no-js not-ie">
 <head>
   <meta charset="utf-8">
   <title>{% if meta.title %}{{ meta.title }} | {% endif %}{{ site_title }}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  {% if meta.title %}
+  <meta name="title" content="{{ meta.title }}">
+  <meta property="og:title" content="{{ meta.title }}">
+  {% endif %}
   {% if meta.description %}
   <meta name="description" content="{{ meta.description }}">
-  {% endif %}{% if meta.robots %}
+  <meta itemprop="description" content="{{ meta.description }}">
+  <meta property="og:description" content="{{ meta.description }}">
+  {% endif %}
+  {% if meta.robots %}
   <meta name="robots" content="{{ meta.robots }}">
   {% endif %}
+  <meta itemprop="url" content="{{ current_page.url }}">
+  <meta itemprop="email" content="{{ config.email }}">
+  <meta property="og:url" content="{{ base_url }}">
+  <meta property="og:site_name" content="{{ site_title }}">
+  <meta property="article:author" content="{{ site_title }}" />
+  <meta itemprop="image logo" content="{{ theme_url }}/img/logo.png">
+  <meta property="og:image" content="{{ theme_url }}/img/logo.png">
+  <link rel="shortcut icon" href="{{ theme_url }}/favicon.ico" />
   <link rel="stylesheet" href="{{ theme_url }}/css/style.css">
+  <script type="text/javascript">
+    window.base_url = "{{ base_url }}";
+  </script>
 </head>
 <body>
   <div class="container">
