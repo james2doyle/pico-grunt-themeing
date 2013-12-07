@@ -15,6 +15,13 @@ module.exports = function(grunt) {
         dest: 'css/style.css'
       }
     },
+    uglify: {
+      scripts: {
+        files: {
+          'js/script.min.js': ['js/script.js']
+        }
+      }
+    },
     sass: {
       dist: {
         files: {
@@ -29,6 +36,16 @@ module.exports = function(grunt) {
       your_target: {
         src: 'css/style.css',
         dest: 'css/style.css'
+      }
+    },
+    imagemin: {
+      build: {
+        files: [{
+          expand: true,
+          cwd: 'img',
+          src: '{,*/}*.{png,jpg,jpeg}',
+          dest: 'img'
+        }]
       }
     },
     watch: {
@@ -51,9 +68,11 @@ module.exports = function(grunt) {
   });
 
 grunt.loadNpmTasks('grunt-sass');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-imagemin');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-autoprefixer');
 
-grunt.registerTask('default', ['sass', 'concat', 'autoprefixer']);
+grunt.registerTask('default', ['sass', 'concat', 'autoprefixer', 'uglify', 'imagemin']);
 };
