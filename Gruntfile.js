@@ -2,24 +2,25 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    meta: {
+      banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+        '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> (<%= pkg.author.url %>)\n' +
+        '* Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n'
+    },
     concat: {
       options: {
-        separator: '\n'
+        separator: '\n',
+        stripBanner: true
       },
       scripts: {
         src: ['src/scripts/*.js'],
         dest: 'js/script.js'
       },
       styles: {
-        src: ['css/*.css', '!css/style.css'],
+        src: ['css/*.css', '!css/style.css', '!css/style.min.css'],
         dest: 'css/style.css'
-      }
-    },
-    uglify: {
-      scripts: {
-        files: {
-          'js/script.min.js': ['js/script.js']
-        }
       }
     },
     sass: {
@@ -38,16 +39,6 @@ module.exports = function(grunt) {
         dest: 'css/style.css'
       }
     },
-    imagemin: {
-      build: {
-        files: [{
-          expand: true,
-          cwd: 'img',
-          src: '{,*/}*.{png,jpg,jpeg}',
-          dest: 'img'
-        }]
-      }
-    },
     watch: {
       options: {
         livereload: true
@@ -64,15 +55,36 @@ module.exports = function(grunt) {
         files: ['src/scripts/*.js'],
         tasks: ['concat:scripts']
       }
+    },
+    uglify: {
+      options: {
+        banner: '<%= meta.banner %>'
+      },
+      build: {
+        files: {
+          'js/script.min.js': ['js/script.js']
+        }
+      }
+    },
+    cssmin: {
+      compress: {
+        options: {
+          banner: '<%= meta.banner %>'
+        },
+        files: {
+          'css/style.min.css': ['css/style.css']
+        }
+      }
     }
   });
 
-grunt.loadNpmTasks('grunt-sass');
-grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-contrib-imagemin');
-grunt.loadNpmTasks('grunt-contrib-watch');
-grunt.loadNpmTasks('grunt-contrib-concat');
-grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-grunt.registerTask('default', ['sass', 'concat', 'autoprefixer', 'uglify', 'imagemin']);
+  grunt.registerTask('default', ['sass', 'concat', 'autoprefixer']);
+  grunt.registerTask('compress', ['sass', 'concat', 'uglify', 'autoprefixer', 'cssmin']);
 };
