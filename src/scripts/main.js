@@ -27,7 +27,7 @@ var prefix = (function () {
 })();
 
 function xhr(url, obj, callback){
-  var xhro = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP');
+  var xhro = new XMLHttpRequest();
   xhro.open('POST', url, true);
   xhro.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhro.onreadystatechange = function () {
